@@ -148,7 +148,348 @@ h2 { font-size:24px; font-weight:500; margin-bottom:1.75rem; }
 .contact-form textarea { height:100px; }
 
 footer { padding:1.5rem 2rem; display:flex; justify-content:space-between; align-items:center; font-size:13px; color:var(--muted); border-top:0.5px solid var(--border); }
+
+/* ===== EXTRA ANIMATIONS ===== */
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+@keyframes blink {
+  0%, 100% { border-color: var(--accent); }
+  50% { border-color: transparent; }
+}
+@keyframes slideInLeft {
+  from { opacity:0; transform:translateX(-30px); }
+  to { opacity:1; transform:translateX(0); }
+}
+@keyframes slideInRight {
+  from { opacity:0; transform:translateX(30px); }
+  to { opacity:1; transform:translateX(0); }
+}
+@keyframes countUp {
+  from { opacity:0; transform:translateY(10px) scale(0.8); }
+  to { opacity:1; transform:translateY(0) scale(1); }
+}
+@keyframes borderDraw {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0% 0 0); }
+}
+@keyframes particleDrift {
+  0%   { transform: translateY(0) translateX(0) scale(1); opacity:0.7; }
+  33%  { transform: translateY(-20px) translateX(10px) scale(1.1); opacity:1; }
+  66%  { transform: translateY(-10px) translateX(-8px) scale(0.9); opacity:0.8; }
+  100% { transform: translateY(0) translateX(0) scale(1); opacity:0.7; }
+}
+@keyframes morphGlow {
+  0%,100% { border-radius:60% 40% 30% 70%/60% 30% 70% 40%; box-shadow:0 0 20px rgba(126,87,194,0.2); }
+  25%      { border-radius:30% 60% 70% 40%/50% 60% 30% 60%; box-shadow:0 0 40px rgba(126,87,194,0.4); }
+  50%      { border-radius:50% 60% 30% 60%/30% 60% 60% 40%; box-shadow:0 0 30px rgba(179,157,219,0.3); }
+  75%      { border-radius:60% 40% 60% 30%/70% 30% 50% 60%; box-shadow:0 0 50px rgba(126,87,194,0.5); }
+}
+@keyframes shimmerSlide {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+@keyframes wiggle {
+  0%,100% { transform:rotate(0deg); }
+  25%      { transform:rotate(-5deg) scale(1.1); }
+  75%      { transform:rotate(5deg) scale(1.1); }
+}
+@keyframes scanline {
+  0%   { top:-10%; }
+  100% { top:110%; }
+}
+@keyframes glitchX {
+  0%,100% { clip-path:inset(0 0 95% 0); transform:translateX(-3px); }
+  20%      { clip-path:inset(30% 0 50% 0); transform:translateX(3px); }
+  40%      { clip-path:inset(60% 0 20% 0); transform:translateX(-3px); }
+  60%      { clip-path:inset(80% 0 5%  0); transform:translateX(2px); }
+  80%      { clip-path:inset(10% 0 80% 0); transform:translateX(-2px); }
+}
+
+/* Typewriter on hero h1 */
+.hero h1 {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid var(--accent);
+  animation: fadeUp 0.6s ease 0.3s both, blink 0.8s step-end 2s 6;
+}
+
+/* Morphing blob behind avatar */
+.hero-avatar-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -16px;
+  background: radial-gradient(circle, rgba(126,87,194,0.18) 0%, transparent 70%);
+  animation: morphGlow 6s ease-in-out infinite;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Particle dots floating in hero */
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.5;
+  pointer-events: none;
+}
+.p1 { top:15%; right:20%; animation: particleDrift 5s ease-in-out infinite; }
+.p2 { top:40%; right:8%;  animation: particleDrift 7s ease-in-out 1s infinite; }
+.p3 { top:70%; right:25%; animation: particleDrift 6s ease-in-out 2s infinite; }
+.p4 { top:25%; right:40%; animation: particleDrift 8s ease-in-out 0.5s infinite; width:3px; height:3px; }
+.p5 { top:60%; right:15%; animation: particleDrift 5.5s ease-in-out 1.5s infinite; width:5px; height:5px; }
+
+/* Timeline items slide in */
+.timeline-item:nth-child(odd)  { animation: slideInLeft  0.5s ease both; }
+.timeline-item:nth-child(even) { animation: slideInRight 0.5s ease 0.1s both; }
+
+/* Stats count-up feel */
+.stat-num { animation: countUp 0.6s ease both; }
+.stat:nth-child(1) .stat-num { animation-delay: 0.7s; }
+.stat:nth-child(2) .stat-num { animation-delay: 0.85s; }
+.stat:nth-child(3) .stat-num { animation-delay: 1s; }
+.stat:nth-child(4) .stat-num { animation-delay: 1.15s; }
+
+/* Shimmer on skill tags */
+.skill-tag {
+  position: relative;
+  overflow: hidden;
+}
+.skill-tag::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(179,157,219,0.15) 50%, transparent 100%);
+  background-size: 400px 100%;
+  animation: shimmerSlide 3s ease-in-out infinite;
+}
+
+/* Project icon wiggle on card hover */
+.project-card:hover .project-icon { animation: wiggle 0.4s ease; }
+
+/* Badge cards staggered slide-up */
+.badge-card { animation: fadeUp 0.5s ease both; }
+
+/* Scanline effect on nav */
+nav::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(179,157,219,0.4), transparent);
+  animation: scanline 3s linear infinite;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Section labels animated underline */
+.section-label {
+  position: relative;
+  display: inline-block;
+}
+.section-label::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; left: 0;
+  height: 1px;
+  width: 100%;
+  background: var(--accent2);
+  animation: borderDraw 1s ease both;
+}
+
+/* Contact links pulse on hover */
+.contact-link:hover .link-icon { animation: wiggle 0.3s ease; }
+
+/* Footer subtle glow text */
+footer span:last-child {
+  text-shadow: 0 0 12px rgba(179,157,219,0.6);
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+/* Scroll reveal — elements fade up as they enter view */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ===== ENHANCED BADGE ANIMATIONS ===== */
+@keyframes badgeFloat {
+  0%,100% { transform: translateY(0px) rotate(0deg); }
+  33%      { transform: translateY(-8px) rotate(1deg); }
+  66%      { transform: translateY(-4px) rotate(-1deg); }
+}
+@keyframes badgeShine {
+  0%   { left: -100%; opacity: 0; }
+  20%  { opacity: 1; }
+  100% { left: 200%; opacity: 0; }
+}
+@keyframes ringPulse {
+  0%,100% { transform: scale(1); opacity: 0.6; }
+  50%      { transform: scale(1.15); opacity: 1; }
+}
+@keyframes badgeGlowRotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes verifiedPop {
+  0%   { transform: scale(0) rotate(-20deg); opacity: 0; }
+  70%  { transform: scale(1.2) rotate(5deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+@keyframes issuerlabel {
+  from { opacity:0; transform: translateY(4px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+@keyframes cardTilt {
+  0%   { transform: perspective(600px) rotateX(0deg) rotateY(0deg) translateY(0); }
+  100% { transform: perspective(600px) rotateX(0deg) rotateY(0deg) translateY(-6px); }
+}
+
+/* Badge card complete overhaul */
+.badge-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.175,0.885,0.32,1.275), box-shadow 0.4s ease, border-color 0.3s ease;
+  animation: fadeUp 0.6s ease both;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+/* Animated gradient border on hover */
+.badge-card::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 16px;
+  background: conic-gradient(from 0deg, var(--accent2), var(--accent), #e040fb, var(--accent2));
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: -1;
+  animation: badgeGlowRotate 3s linear infinite;
+}
+.badge-card:hover::before { opacity: 1; }
+
+/* Shine sweep on hover */
+.badge-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+  transform: skewX(-20deg);
+  transition: none;
+  z-index: 2;
+  pointer-events: none;
+}
+.badge-card:hover::after {
+  animation: badgeShine 0.7s ease forwards;
+}
+
+/* Floating badge image */
+.badge-card:hover .badge-img-wrap {
+  animation: badgeFloat 2s ease-in-out infinite;
+  border-color: var(--accent);
+  box-shadow: 0 0 20px rgba(179,157,219,0.4), 0 0 40px rgba(126,87,194,0.2);
+}
+
+/* Pulse ring around image on hover */
+.badge-img-wrap {
+  position: relative;
+  transition: all 0.4s ease;
+}
+.badge-img-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(179,157,219,0.3);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  animation: ringPulse 2s ease-in-out infinite;
+}
+.badge-card:hover .badge-img-wrap::before { opacity: 1; }
+
+/* Verified checkmark that pops on hover */
+.badge-card .badge-check {
+  position: absolute;
+  top: 10px; right: 10px;
+  width: 20px; height: 20px;
+  background: #4caf50;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px;
+  color: white;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.3s ease;
+  z-index: 3;
+  box-shadow: 0 2px 8px rgba(76,175,80,0.5);
+}
+.badge-card:hover .badge-check {
+  opacity: 1;
+  animation: verifiedPop 0.4s cubic-bezier(0.175,0.885,0.32,1.275) forwards;
+}
+
+/* Badge name reveal animation */
+.badge-card .badge-name {
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+.badge-card:hover .badge-name {
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
+/* Year badge pulse */
+.badge-card .badge-year {
+  transition: all 0.3s ease;
+}
+.badge-card:hover .badge-year {
+  background: rgba(179,157,219,0.25);
+  box-shadow: 0 0 10px rgba(179,157,219,0.3);
+}
+
+/* Issuer fade animation */
+.badge-card .badge-issuer {
+  transition: all 0.3s ease;
+}
+.badge-card:hover .badge-issuer {
+  color: var(--text);
+}
+
+/* Staggered entrance delays */
+.badge-card:nth-child(1)  { animation-delay: 0.05s; }
+.badge-card:nth-child(2)  { animation-delay: 0.12s; }
+.badge-card:nth-child(3)  { animation-delay: 0.19s; }
+.badge-card:nth-child(4)  { animation-delay: 0.26s; }
+.badge-card:nth-child(5)  { animation-delay: 0.33s; }
+.badge-card:nth-child(6)  { animation-delay: 0.40s; }
+.badge-card:nth-child(7)  { animation-delay: 0.47s; }
+.badge-card:nth-child(8)  { animation-delay: 0.54s; }
+.badge-card:nth-child(9)  { animation-delay: 0.61s; }
+
+/* Section heading animated underline */
+#badges h2 {
+  position: relative;
+  display: inline-block;
+}
+#badges h2::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent2), var(--accent));
+  border-radius: 2px;
+  transition: width 0.8s ease;
+}
+#badges.visible h2::after { width: 100%; }
+
+/* 3D tilt effect via JS — prep */
+.badge-card { will-change: transform; }
+
 </style>
+
 </head>
 <body>
 
@@ -190,7 +531,7 @@ footer { padding:1.5rem 2rem; display:flex; justify-content:space-between; align
 </section>
 
 <div class="stats-bar">
-  <div class="stat"><div class="stat-num">2+</div><div class="stat-label">Years exp.</div></div>
+  <div class="stat"><div class="stat-num">1+</div><div class="stat-label">Years exp.</div></div>
   <div class="stat"><div class="stat-num">9</div><div class="stat-label">Certifications</div></div>
   <div class="stat"><div class="stat-num">2</div><div class="stat-label">Projects</div></div>
   <div class="stat"><div class="stat-num">5+</div><div class="stat-label">Tools mastered</div></div>
@@ -406,5 +747,102 @@ footer { padding:1.5rem 2rem; display:flex; justify-content:space-between; align
   <span style="color:var(--accent);">Data Analyst</span>
 </footer>
 
+
+<!-- Floating particles -->
+<div class="particle p1"></div>
+<div class="particle p2"></div>
+<div class="particle p3"></div>
+<div class="particle p4"></div>
+<div class="particle p5"></div>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(el => {
+    if (el.isIntersecting) {
+      el.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('section, .timeline-item, .project-card, .badge-card, .skill-group, .stat').forEach(el => {
+  el.classList.add('reveal');
+  observer.observe(el);
+});
+
+// Animated number counters
+const counters = document.querySelectorAll('.stat-num');
+const countObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      const raw = el.textContent.trim();
+      const num = parseInt(raw);
+      if (isNaN(num)) return;
+      const suffix = raw.replace(/[0-9]/g, '');
+      let current = 0;
+      const step = Math.ceil(num / 30);
+      const timer = setInterval(() => {
+        current += step;
+        if (current >= num) { current = num; clearInterval(timer); }
+        el.textContent = current + suffix;
+      }, 40);
+      countObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+counters.forEach(c => countObserver.observe(c));
+
+// Cursor glow trail
+const trail = document.createElement('div');
+trail.style.cssText = 'position:fixed;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(126,87,194,0.08) 0%,transparent 70%);pointer-events:none;z-index:9999;transition:transform 0.15s ease;transform:translate(-50%,-50%)';
+document.body.appendChild(trail);
+document.addEventListener('mousemove', e => {
+  trail.style.left = e.clientX + 'px';
+  trail.style.top  = e.clientY + 'px';
+});
+
+// Navbar active link highlight on scroll
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 120) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.style.color = (a.getAttribute('href') === '#' + current) ? 'var(--accent)' : '';
+  });
+});
+
+// Add verified checkmark to each badge card
+document.querySelectorAll('.badge-card').forEach(card => {
+  const check = document.createElement('div');
+  check.className = 'badge-check';
+  check.textContent = '✓';
+  card.appendChild(check);
+});
+
+// 3D tilt effect on badge cards
+document.querySelectorAll('.badge-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const cx = rect.width / 2;
+    const cy = rect.height / 2;
+    const rotY =  ((x - cx) / cx) * 10;
+    const rotX = -((y - cy) / cy) * 10;
+    card.style.transform = `perspective(600px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-6px) scale(1.03)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+    card.style.transition = 'transform 0.5s cubic-bezier(0.175,0.885,0.32,1.275)';
+    setTimeout(() => card.style.transition = '', 500);
+  });
+});
+
+</script>
 </body>
+
 </html>
