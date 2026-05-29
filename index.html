@@ -488,6 +488,89 @@ footer span:last-child {
 /* 3D tilt effect via JS — prep */
 .badge-card { will-change: transform; }
 
+
+/* ===== MOBILE RESPONSIVENESS ===== */
+@media (max-width: 680px) {
+  body { max-width: 100%; overflow-x: hidden; }
+
+  /* Nav */
+  nav { padding: 1rem 1.25rem; }
+  .nav-logo { font-size: 13px; }
+  .nav-links { gap: 0.75rem; }
+  .nav-links a { font-size: 11px; }
+
+  /* Hero */
+  .hero { padding: 2rem 1.25rem; }
+  .hero-inner { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+  .hero-avatar-wrap { align-self: center; }
+  .hero-avatar { width: 100px; height: 100px; }
+  .hero h1 { font-size: 32px; white-space: normal; border-right: none; }
+  .hero-sub { font-size: 14px; }
+  .hero-tag { font-size: 10px; }
+  .hero-location { font-size: 12px; }
+  .contact-pill { font-size: 11px; padding: 5px 10px; }
+  .action-btns { gap: 6px; }
+  .btn-primary, .btn-outline { padding: 9px 16px; font-size: 12px; }
+
+  /* Stats bar */
+  .stats-bar { grid-template-columns: repeat(2, 1fr); }
+  .stat { padding: 1rem 0.5rem; }
+  .stat-num { font-size: 22px; }
+  .stat-label { font-size: 11px; }
+
+  /* Sections */
+  section { padding: 2rem 1.25rem; }
+  h2 { font-size: 20px; margin-bottom: 1.25rem; }
+
+  /* Timeline */
+  .timeline-item { padding: 1rem 1.1rem; }
+  .tl-header { flex-direction: column; gap: 4px; }
+  .tl-date { align-self: flex-start; }
+  .tl-title { font-size: 14px; }
+  .tl-bullets li { font-size: 13px; }
+
+  /* Projects grid — stack on mobile */
+  .projects-grid { grid-template-columns: 1fr; }
+  .project-card[style*="grid-column"] { grid-column: span 1 !important; }
+  .cariq-card > div { flex-direction: column !important; }
+  .cariq-preview { width: 100% !important; height: 160px !important; }
+
+  /* Skills */
+  .skills-cols { grid-template-columns: 1fr; gap: 0.75rem; }
+
+  /* Badges grid — 2 cols on mobile */
+  .badges-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+  .badge-img-wrap { width: 56px; height: 56px; }
+  .badge-name { font-size: 11px; }
+  .badge-issuer { font-size: 10px; }
+
+  /* Contact */
+  .contact-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+
+  /* Footer */
+  footer { flex-direction: column; gap: 4px; text-align: center; padding: 1.25rem; }
+}
+
+@media (max-width: 400px) {
+  .hero h1 { font-size: 28px; }
+  .badges-grid { grid-template-columns: repeat(2, 1fr); }
+  .stats-bar { grid-template-columns: repeat(2, 1fr); }
+  .nav-links { gap: 0.5rem; }
+  .nav-links a { font-size: 10px; }
+}
+
+/* Tablet adjustments */
+@media (min-width: 481px) and (max-width: 767px) {
+  body { max-width: 100%; padding: 0; }
+  .hero h1 { font-size: 36px; }
+  .badges-grid { grid-template-columns: repeat(3, 1fr); }
+  .skills-cols { grid-template-columns: 1fr 1fr; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .project-card[style*="grid-column"] { grid-column: span 1 !important; }
+  .cariq-card > div { flex-direction: column !important; }
+  .cariq-preview { width: 100% !important; }
+}
+
 </style>
 
 </head>
@@ -533,7 +616,7 @@ footer span:last-child {
 <div class="stats-bar">
   <div class="stat"><div class="stat-num">1+</div><div class="stat-label">Years exp.</div></div>
   <div class="stat"><div class="stat-num">9</div><div class="stat-label">Certifications</div></div>
-  <div class="stat"><div class="stat-num">2</div><div class="stat-label">Projects</div></div>
+  <div class="stat"><div class="stat-num">3</div><div class="stat-label">Projects</div></div>
   <div class="stat"><div class="stat-num">5+</div><div class="stat-label">Tools mastered</div></div>
 </div>
 
@@ -551,6 +634,8 @@ footer span:last-child {
     <div class="ticker-item">👁 <span>Computer Vision</span></div>
     <div class="ticker-item">⚙ <span>Celonis</span></div>
     <div class="ticker-item">📋 <span>Qlik</span></div>
+    <div class="ticker-item">🚗 <span>CarIQ</span></div>
+    <div class="ticker-item">🌩 <span>Google Cloud</span></div>
     <div class="ticker-item">🐍 <span>Python</span></div>
     <div class="ticker-item">🗄 <span>SQL</span></div>
     <div class="ticker-item">📊 <span>Tableau</span></div>
@@ -626,6 +711,32 @@ footer span:last-child {
       <p>Analyzed real-world datasets and derived actionable insights using Qlik's data literacy framework.</p>
       <span class="project-tag">Qlik · Data Analysis</span>
     </div>
+    <div class="project-card cariq-card" style="grid-column: span 2; position:relative;">
+      <div style="display:flex; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
+        <div style="flex:1; min-width:220px;">
+          <div class="project-icon">🚗</div>
+          <h3>CarIQ — Automobile Market Intelligence</h3>
+          <p>Built an end-to-end data pipeline scraping 500+ live car listings using Playwright. Trained a Random Forest model achieving <strong style="color:var(--accent)">87% R² accuracy</strong> for used car price prediction. Deployed a full-stack Flask app with price predictor, market analytics dashboard, and live listings explorer.</p>
+          <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:10px;">
+            <span class="project-tag">Python · Flask</span>
+            <span class="project-tag">Scikit-learn</span>
+            <span class="project-tag">Playwright</span>
+            <span class="project-tag">BeautifulSoup</span>
+            <span class="project-tag">Pandas</span>
+            <span class="project-tag">Chart.js</span>
+          </div>
+          <div style="display:flex; gap:10px; margin-top:14px; flex-wrap:wrap;">
+            <a href="https://cariq-1krl.onrender.com/" target="_blank" class="btn-primary" style="font-size:12px; padding:8px 18px;">🌐 Live Demo</a>
+            <a href="https://github.com/aathersh20/cariq" target="_blank" class="btn-outline" style="font-size:12px; padding:8px 18px;">⌨ GitHub</a>
+          </div>
+        </div>
+        <div class="cariq-preview" style="flex-shrink:0; width:220px; height:140px; border-radius:10px; overflow:hidden; border:1px solid var(--border); position:relative; background:var(--surface2);">
+          <iframe src="https://cariq-1krl.onrender.com/" style="width:200%; height:200%; transform:scale(0.5); transform-origin:top left; border:none; pointer-events:none;" scrolling="no" title="CarIQ Preview"></iframe>
+          <div style="position:absolute;inset:0;background:linear-gradient(135deg,transparent 60%,rgba(14,14,15,0.8));pointer-events:none;"></div>
+          <div style="position:absolute;bottom:8px;right:8px;font-size:10px;color:var(--accent);background:rgba(14,14,15,0.8);padding:3px 8px;border-radius:20px;border:1px solid var(--border);">Live ↗</div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -638,7 +749,7 @@ footer span:last-child {
       <div class="skill-tags">
         <span class="skill-tag">Python</span><span class="skill-tag">SQL</span>
         <span class="skill-tag">Tableau</span><span class="skill-tag">Power BI</span>
-        <span class="skill-tag">Excel</span><span class="skill-tag">Google Sheets</span>
+        <span class="skill-tag">Excel</span><span class="skill-tag">Google Sheets</span><span class="skill-tag">Flask</span>
       </div>
     </div>
     <div class="skill-group">
